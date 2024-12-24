@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gussa Ho?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            position: relative;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #007bff;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #no-button {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gussa Ho?</h1>
+    <div class="buttons">
+        <button class="button" onclick="showLoveMessage()" aria-label="Yes">Haan</button>
+        <button class="button" id="no-button" onclick="moveNoButton()" aria-label="No">Nahi</button>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no-button');
+
+        // Function to move the "Nahi" button to a random position
+        function moveNoButton() {
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight - 20);
+
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        // Function to show a message when "Haan" is clicked
+        function showLoveMessage() {
+            alert("Phew! Khushi hui sunke.");
+        }
+
+        // Ensure the "Nahi" button moves immediately when the page loads
+        window.onload = () => moveNoButton();
+    </script>
+</body>
+</html>
