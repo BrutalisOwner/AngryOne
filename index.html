@@ -23,6 +23,9 @@
         }
         .buttons {
             position: relative;
+            display: flex;
+            justify-content: space-between;
+            width: 60%; /* Added width to buttons container */
         }
         .button {
             padding: 10px 20px;
@@ -38,37 +41,55 @@
         .button:hover {
             background-color: #0056b3;
         }
-        #no-button {
-            position: absolute;
+        #no-button, #yes-button {
+            position: relative;
         }
     </style>
 </head>
 <body>
     <h1>Gussa Ho?</h1>
     <div class="buttons">
-        <button class="button" onclick="showLoveMessage()" aria-label="Yes">Haan</button>
+        <button class="button" id="yes-button" onclick="showLoveMessage()" aria-label="Yes">Haan</button>
         <button class="button" id="no-button" onclick="moveNoButton()" aria-label="No">Nahi</button>
     </div>
 
     <script>
-        const noButton = document.getElementById('no-button');
+        const haanButton = document.getElementById("yes-button");
+        const noButton = document.getElementById("no-button");
 
-        // Function to move the "Nahi" button to a random position
+        // Set initial positions relative to parent container
+        function setInitialPositions() {
+            const bodyHeight = window.innerHeight;
+            const bodyWidth = window.innerWidth;
+            
+            // Initial position near center, but not overlapping
+            haanButton.style.marginLeft = `${bodyWidth / 4}px`;
+            noButton.style.marginLeft = `${(bodyWidth / 4) * 3}px`;
+            haanButton.style.marginTop = `${bodyHeight / 2 - 50}px`;
+            noButton.style.marginTop = `${bodyHeight / 2 - 50}px`;
+        }
+
+        // Function to move the "Nahi" button near the "Haan" button
         function moveNoButton() {
-            const x = Math.random() * (window.innerWidth - noButton.offsetWidth - 20);
-            const y = Math.random() * (window.innerHeight - noButton.offsetHeight - 20);
+            const haanButtonRect = haanButton.getBoundingClientRect();
 
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
+            const maxOffsetX = 150;
+            const maxOffsetY = 150;
+
+            const x = haanButtonRect.left + Math.random() * maxOffsetX - maxOffsetX / 2;
+            const y = haanButtonRect.top + Math.random() * maxOffsetY - maxOffsetY / 2;
+
+            noButton.style.left = `${Math.min(Math.max(x, 10), window.innerWidth - noButton.offsetWidth - 10)}px`;
+            noButton.style.top = `${Math.min(Math.max(y, 10), window.innerHeight - noButton.offsetHeight - 10)}px`;
         }
 
         // Function to show a message when "Haan" is clicked
         function showLoveMessage() {
-            alert("Phew! Khushi hui sunke.");
+            alert("Ab Kyaa Karu Me Orr 🥲🥲👽");
         }
 
-        // Ensure the "Nahi" button moves immediately when the page loads
-        window.onload = () => moveNoButton();
+        // Call this function to initially set button positions
+        setInitialPositions();
     </script>
 </body>
 </html>
