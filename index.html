@@ -15,7 +15,6 @@
             margin: 0;
             background-color: #f0f8ff;
             overflow: hidden;
-            position: relative;
         }
         h1 {
             color: #333;
@@ -24,14 +23,16 @@
         }
         .buttons {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            width: 100%;
+            gap: 20px;
+            width: 90%;
+            max-width: 300px;
+            position: relative;
         }
         .button {
             padding: 15px 30px;
-            font-size: 18px;
-            margin: 10px;
+            font-size: 16px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
@@ -42,22 +43,8 @@
         .button:hover {
             background-color: #0056b3;
         }
-
         #no-button {
             position: absolute;
-        }
-
-        /* Media Queries for Mobile Responsiveness */
-        @media screen and (max-width: 600px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .button {
-                font-size: 16px;
-                padding: 10px 20px;
-                margin: 5px;
-            }
         }
     </style>
 </head>
@@ -72,33 +59,30 @@
         const haanButton = document.getElementById("yes-button");
         const noButton = document.getElementById("no-button");
 
-        // Ensure buttons are placed symmetrically
+        // Position the "Haan" and "Nahi" buttons initially
+        const haanButtonRect = haanButton.getBoundingClientRect();
+        const buttonSpacing = 120; // Space between buttons
+
         haanButton.style.position = "absolute";
+        haanButton.style.left = `${window.innerWidth / 2 - buttonSpacing}px`;
+        haanButton.style.top = `${window.innerHeight / 2}px`;
+
         noButton.style.position = "absolute";
+        noButton.style.left = `${window.innerWidth / 2 + buttonSpacing}px`;
+        noButton.style.top = `${window.innerHeight / 2}px`;
 
-        haanButton.style.top = "50%";
-        haanButton.style.left = "40%";
-        noButton.style.top = "50%";
-        noButton.style.left = "60%";
-
-        // Function to move the "Nahi" button near the "Haan" button
+        // Move the "Nahi" button when clicked
         function moveNoButton() {
-            const haanButtonRect = haanButton.getBoundingClientRect();
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
 
-            const maxOffsetX = 100;  // Maximum horizontal distance from "Haan"
-            const maxOffsetY = 100;  // Maximum vertical distance from "Haan"
-
-            const x = haanButtonRect.left + Math.random() * maxOffsetX - maxOffsetX / 2;
-            const y = haanButtonRect.top + Math.random() * maxOffsetY - maxOffsetY / 2;
-
-            // Ensure the "Nahi" button stays within the visible part of the screen
             noButton.style.left = `${Math.min(Math.max(x, 10), window.innerWidth - noButton.offsetWidth - 10)}px`;
             noButton.style.top = `${Math.min(Math.max(y, 10), window.innerHeight - noButton.offsetHeight - 10)}px`;
         }
 
-        // Function to show a message when "Haan" is clicked
+        // Display the alert when the "Haan" button is clicked
         function showLoveMessage() {
-            alert("Ab Kyaa Karu Me Orr 🥲🥲👽");
+            alert("Haww Merse Gussa Ho... Billekup Abto 👽👽");
         }
     </script>
 </body>
