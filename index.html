@@ -19,7 +19,7 @@
         }
         h1 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 50px; /* Adjusted to move the text slightly upwards */
             font-size: 2rem;
         }
         .buttons {
@@ -57,7 +57,9 @@
         const haanButton = document.getElementById("yes-button");
         const noButton = document.getElementById("no-button");
 
-        // Initial positions of both buttons
+        // Restriction area is slightly increased
+        const restrictionPadding = 20; 
+
         function initializePositions() {
             const containerWidth = document.body.offsetWidth;
             const containerHeight = document.body.offsetHeight;
@@ -80,15 +82,15 @@
         function moveNoButton() {
             const haanButtonRect = haanButton.getBoundingClientRect();
 
-            const maxOffsetX = 150; // Maximum horizontal distance from "Haan"
-            const maxOffsetY = 150; // Maximum vertical distance from "Haan"
+            const maxOffsetX = 200; // Increased horizontal distance
+            const maxOffsetY = 200; // Increased vertical distance
 
             const x = haanButtonRect.left + Math.random() * maxOffsetX - maxOffsetX / 2;
             const y = haanButtonRect.top + Math.random() * maxOffsetY - maxOffsetY / 2;
 
             // Ensure the "Nahi" button stays within the visible part of the screen
-            noButton.style.left = `${Math.min(Math.max(x, 10), window.innerWidth - noButton.offsetWidth - 10)}px`;
-            noButton.style.top = `${Math.min(Math.max(y, 10), window.innerHeight - noButton.offsetHeight - 10)}px`;
+            noButton.style.left = `${Math.min(Math.max(x, restrictionPadding), window.innerWidth - noButton.offsetWidth - restrictionPadding)}px`;
+            noButton.style.top = `${Math.min(Math.max(y, restrictionPadding), window.innerHeight - noButton.offsetHeight - restrictionPadding)}px`;
         }
 
         // Function to show a message when "Haan" is clicked
